@@ -1,0 +1,150 @@
+.detailArticle {
+	width: 60%;
+	margin: 3rem auto;
+}
+
+.detailArticle > .backBtn {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.2));
+	transition: filter 0.2s ease-in-out;
+	cursor: pointer;
+	margin-bottom: 16px;
+}
+
+.detailArticle > .backBtn:hover {
+	filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.25));
+}
+
+.detailArticle > .backBtn > img {
+	width: 30px;
+	margin-right: 8px;
+}
+
+.detailArticle > .backBtn > span {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 30px;
+	color: #000000;
+}
+
+.articleInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.articleInfo > p:first-child {
+	text-shadow: 6px 6px 10px rgba(0, 0, 0, 0.25);
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 36px;
+	color: #000000;
+}
+
+.articleInfo > img {
+	max-width: 700px;
+	width: 100%;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+	margin: 32px 0 16px;
+}
+
+.articleInfo > .dates {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.articleInfo > .dates > p {
+	text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
+	color: #000000;
+	margin-right: 32px;
+}
+
+.articleInfo > .dates > p > time {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #906383;
+}
+
+.articleInfo > p:nth-child(4),
+.articleInfo > p:nth-child(5) {
+	text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 22px;
+	color: #000000;
+}
+
+.articleInfo > p:nth-child(4) {
+	margin: 16px 0;
+}
+
+.articleInfo > p:nth-child(4) > span,
+.articleInfo > p:nth-child(5) > a {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #906383;
+}
+
+.relatedArticles > p:first-child {
+	text-shadow: 6px 6px 10px rgba(0, 0, 0, 0.25);
+	font-weight: 600;
+	font-size: 28px;
+	line-height: 30px;
+	text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+	color: #000000;
+	margin: 32px 0 16px;
+}
+
+.relatedArticles > .articleCards {
+	column-count: 2;
+	column-gap: 32px;
+}
+
+.relatedArticles > .articleCards > .article:not(:last-child)::after {
+	display: block;
+	content: "";
+	width: 100%;
+	height: 1px;
+	margin: 16px 0;
+	background: linear-gradient(to right, rgba(148, 154, 180, 1), rgba(148, 154, 180, 0.2));
+}
+
+@media screen and (max-width: 1200px) {
+	.detailArticle {
+		width: 70%;
+		margin: 4rem auto;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.detailArticle {
+		width: 80%;
+		margin: 4rem auto;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.detailArticle {
+		width: 90%;
+		margin: 3rem auto;
+	}
+}
+
+@media screen and (max-width: 678px) {
+	.detailArticle {
+		width: 95%;
+		margin: 2rem auto;
+	}
+	.detailArticle > .relatedArticles > .articleCards {
+		column-count: 1;
+		column-gap: 32px;
+	}
+}
