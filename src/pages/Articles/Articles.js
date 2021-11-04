@@ -75,8 +75,8 @@ const Articles = () => {
 					-5
 				</p>
 				<ReactPaginate
-					previousLabel="Previous"
-					nextLabel="Next"
+					previousLabel="<<"
+					nextLabel=">>"
 					pageClassName="page-item"
 					pageLinkClassName="page-link"
 					previousClassName="page-item"
