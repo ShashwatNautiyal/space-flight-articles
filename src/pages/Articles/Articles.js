@@ -12,6 +12,8 @@ const Articles = () => {
 	const [pageOffset, setPageOffset] = useState(0);
 	const [pageCount, setPageCount] = useState(0);
 
+	console.log(pageOffset);
+
 	const getArticles = () => {
 		setHandleLoader(true);
 		axiosConfig
@@ -48,10 +50,14 @@ const Articles = () => {
 	};
 
 	const handleFiveChange = (inp) => {
-		if (inp === "plusFive" && pageOffset < pageCount - 6) {
-			setPageOffset((prev) => prev + 5);
-		} else if (inp === "minusFive" && pageOffset > 6) {
-			setPageOffset((prev) => prev - 5);
+		if (inp === "plusFive" && pageOffset < pageCount - 5) {
+			setPageOffset((prev) => {
+				return prev === 0 ? prev + 4 : prev + 5;
+			});
+		} else if (inp === "minusFive" && pageOffset >= 4) {
+			setPageOffset((prev) => {
+				return prev === 4 ? prev - 4 : prev - 5;
+			});
 		}
 	};
 
@@ -65,7 +71,7 @@ const Articles = () => {
 				))}
 			</div>
 			<div>
-				<p onClick={() => handleFiveChange("minusFive")} className={pageOffset < 6 ? "btnDisabled" : ""}>
+				<p onClick={() => handleFiveChange("minusFive")} className={pageOffset >= 4 ? "" : "btnDisabled"}>
 					-5
 				</p>
 				<ReactPaginate
@@ -90,7 +96,7 @@ const Articles = () => {
 				/>
 				<p
 					onClick={() => handleFiveChange("plusFive")}
-					className={pageOffset > pageCount - 6 ? "btnDisabled" : ""}
+					className={pageOffset < pageCount - 5 ? "" : "btnDisabled"}
 				>
 					+5
 				</p>
