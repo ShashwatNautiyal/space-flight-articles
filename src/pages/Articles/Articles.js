@@ -4,15 +4,17 @@ import Article from "../../components/Article/Article";
 import "./Articles.css";
 import CustomLoader from "../../components/CustomLoader/CustomLoader";
 import ReactPaginate from "react-paginate";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const Articles = () => {
 	const [articles, setArticles] = useState([]);
 	const [handleLoader, setHandleLoader] = useState(false);
-	const articlesPerPage = 10;
 	const [pageOffset, setPageOffset] = useState(0);
 	const [pageCount, setPageCount] = useState(0);
+	const [articlesPerPage, setArticlesPerPage] = useState(5);
+	const options = [5, 10, 15, 20, 25];
 
-	console.log(pageOffset);
+	console.log(pageCount);
 
 	const getArticles = () => {
 		setHandleLoader(true);
@@ -36,11 +38,8 @@ const Articles = () => {
 	};
 
 	useEffect(() => {
-		getArticlesCount();
-	}, []);
-
-	useEffect(() => {
 		getArticles();
+		getArticlesCount();
 		window.scroll(0, 0);
 		// eslint-disable-next-line
 	}, [pageOffset, articlesPerPage]);
@@ -49,31 +48,38 @@ const Articles = () => {
 		setPageOffset(event.selected);
 	};
 
-	const handleFiveChange = (inp) => {
-		if (inp === "plusFive" && pageOffset < pageCount - 5) {
-			setPageOffset((prev) => {
-				return prev === 0 ? prev + 4 : prev + 5;
-			});
-		} else if (inp === "minusFive" && pageOffset >= 4) {
-			setPageOffset((prev) => {
-				return prev === 4 ? prev - 4 : prev - 5;
-			});
-		}
+	const handleSelect = (e) => {
+		setArticlesPerPage(e.target.value);
 	};
 
 	return (
 		<div className="articles">
 			{handleLoader && <CustomLoader />}
-			<p>The Space Flight Articles</p>
+			<div className="heading">
+				<p>Articles on Space Flight</p>
+				<FormControl size="small" className="selectWidth">
+					<InputLabel id="articlesPerPage">Articles Per Page</InputLabel>
+					<Select
+						labelId="articlesPerPage"
+						name="articlesPerPage"
+						value={articlesPerPage}
+						onChange={handleSelect}
+						label="Articles Per Page"
+					>
+						{options.map((item, index) => (
+							<MenuItem key={index} value={item}>
+								{item}
+							</MenuItem>
+						))}
+					</Select>
+				</FormControl>
+			</div>
 			<div className="articleCards">
 				{articles.map((article) => (
 					<Article key={article.id} article={article} />
 				))}
 			</div>
 			<div>
-				<p onClick={() => handleFiveChange("minusFive")} className={pageOffset >= 4 ? "" : "btnDisabled"}>
-					-5
-				</p>
 				<ReactPaginate
 					previousLabel="<<"
 					nextLabel=">>"
@@ -94,12 +100,6 @@ const Articles = () => {
 					activeClassName="active"
 					forcePage={pageOffset}
 				/>
-				<p
-					onClick={() => handleFiveChange("plusFive")}
-					className={pageOffset < pageCount - 5 ? "" : "btnDisabled"}
-				>
-					+5
-				</p>
 			</div>
 		</div>
 	);

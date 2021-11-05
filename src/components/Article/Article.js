@@ -1,15 +1,15 @@
 import Moment from "react-moment";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import "./Article.css";
 
 const Article = ({ article }) => {
-	const history = useHistory();
-
 	return (
-		<div onClick={() => history.push(`/${article.id}`)} className="article">
-			<Moment format="MMMM D, YYYY">{article.updatedAt}</Moment>
-			<p>{article.title}</p>
-			<p>{article.summary}</p>
+		<div className="article">
+			<Link target="_blank" to={`/article/${article.id}`}>
+				<Moment format="MMMM D, YYYY">{article.updatedAt}</Moment>
+				<p>{article.title}</p>
+				<p>{article.summary}</p>
+			</Link>
 		</div>
 	);
 };
